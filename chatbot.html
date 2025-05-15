@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AI Chatbot</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-webgl"></script>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        #chat-box { width: 80%; height: 300px; border: 1px solid #ccc; overflow-y: auto; padding: 10px; margin: auto; }
+        #user-input { width: 60%; padding: 5px; }
+        button { padding: 5px; }
+    </style>
+</head>
+<body>
+
+    <h1>AI Chatbot</h1>
+    <div id="chat-box"></div>
+    <input type="text" id="user-input" placeholder="Type a message...">
+    <button onclick="sendMessage()">Send</button>
+
+    <script>
+        async function getAIResponse(input) {
+            // Simple AI Logic (Adjust responses as needed)
+            let responses = {
+                "hello": "Hey there! How can I help?",
+                "how are you": "I'm an AI, so I don't feel emotions, but I'm here for you!",
+                "bye": "Goodbye! Have a great day."
+            };
+            return responses[input.toLowerCase()] || "I'm still learning! Ask me something else.";
+        }
+
+        async function sendMessage() {
+            let userInput = document.getElementById("user-input").value;
+            let chatBox = document.getElementById("chat-box");
+            chatBox.innerHTML += "<p><strong>You:</strong> " + userInput + "</p>";
+
+            let botResponse = await getAIResponse(userInput);
+            chatBox.innerHTML += "<p><strong>Bot:</strong> " + botResponse + "</p>";
+
+            document.getElementById("user-input").value = "";
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+    </script>
+
+</body>
+</html>
